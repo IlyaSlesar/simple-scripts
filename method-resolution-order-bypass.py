@@ -12,12 +12,15 @@ class Quadrangle:
         if not hasattr(self, "properties"):
             self.properties = {}
 
-    def print_props(self):
+    def props_str(self):
         if len(self.properties) > 0:
-            for prop in self.properties:
-                print(prop)
+            properties_str = []
+            for type in self.properties.keys():
+                properties_str.append(f"{type}: {'. '.join(self.properties[type])}")
         else:
-            print("Нет свойств")
+            properties_str = ['Нет свойств']
+
+        return properties_str
 
 
 class Paralelogram(Quadrangle):
@@ -39,7 +42,7 @@ class Paralelogram(Quadrangle):
                 angle_b
             ]
         )
-        self.name = 'Параллелограм'
+        self.name = 'Параллелограмм'
         self.properties[self.name] = [
             "Противоположные стороны попарно равны и параллельны", 
             "Противоположные углы попарно равны",
@@ -82,8 +85,5 @@ bruh_3 = Rhombus(5, 60, 120)
 bruh_4 = Square(10)
 
 bruhs = [bruh_1, bruh_2, bruh_3, bruh_4]
-for i, bruh in enumerate(bruhs):
-    properties_str = []
-    for type in bruh.properties.keys():
-        properties_str.append(f"{type}: {'. '.join(bruh.properties[type])}")
-    print(f"{i}. {bruh.name} Свойства: \n{'\n'.join(properties_str)}")
+for i, bruh in enumerate(bruhs, start=1):
+    print(f'{i}. Свойства {bruh.name}:\n{"\n".join(bruh.props_str())}')
